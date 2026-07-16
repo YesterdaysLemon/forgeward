@@ -1,0 +1,28 @@
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+dist/
+build/
+
+# Local credentials and overrides
+.env
+.env.*
+!.env.example
+
+# ForgeWard runtime state and exported evidence
+.forgeward/runs/
+.forgeward/exports/
+.forgeward/cache/
+
+# Editors and operating systems
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db

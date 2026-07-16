@@ -1,0 +1,28 @@
+services:
+  landing:
+    build:
+      context: ./site
+    ports:
+      - "8080:8080"
+    read_only: true
+    tmpfs:
+      - /var/cache/nginx
+      - /var/run
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
+
+  forgeward:
+    build:
+      context: .
+    profiles: ["cli"]
+    user: "${FORGEWARD_UID:-10001}:${FORGEWARD_GID:-10001}"
+    working_dir: /workspace
+    volumes:
+      - type: bind
+        source: ${FORGEWARD_PROJECT:-.}
+        target: /workspace
+    environment:
+      FORGEWARD_CONTAINER: "1"
+    security_opt:
+      - no-new-privileges:true

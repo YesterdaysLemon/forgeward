@@ -1,0 +1,45 @@
+name: Bug report
+description: Report reproducible incorrect behavior without including secrets.
+title: "[bug] "
+labels: [bug, triage]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve ForgeWard. Never paste provider keys, private source, or raw sensitive evidence.
+  - type: input
+    id: version
+    attributes:
+      label: ForgeWard version
+      placeholder: "forgeward --version"
+    validations:
+      required: true
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platform
+      options: [Linux, macOS, Windows, Container, Other]
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproduction
+      description: Use the demo provider or sanitized configuration when possible.
+      placeholder: Commands, expected behavior, and actual behavior.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Sanitized evidence
+      description: Include run state or event types only after removing proprietary data and secrets.
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety check
+      options:
+        - label: I removed secrets and private source from this report.
+          required: true
+        - label: This is not an undisclosed vulnerability (those go through SECURITY.md).
+          required: true

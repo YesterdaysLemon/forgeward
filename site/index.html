@@ -1,0 +1,539 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="ForgeWard turns your terminal into a model-agnostic software team with secure lifecycle gates, specialist roles, and reviewable evidence."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="ForgeWard — Your software firm, in the terminal" />
+    <meta
+      property="og:description"
+      content="A model-agnostic agile crew operating inside a secure, reviewable software delivery lifecycle."
+    />
+    <meta name="twitter:card" content="summary" />
+    <meta name="theme-color" content="#11130f" />
+    <meta name="color-scheme" content="light dark" />
+    <title>ForgeWard — Your software firm, in the terminal</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <header class="site-header" id="top">
+      <div class="shell header-inner">
+        <a class="wordmark" href="#top" aria-label="ForgeWard home">
+          <span class="brand-mark" aria-hidden="true"><span>F</span><span>W</span></span>
+          <span class="brand-name">FORGE<span>/</span>WARD</span>
+        </a>
+
+        <button
+          class="menu-toggle"
+          id="menu-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="site-nav"
+        >
+          <span class="sr-only">Toggle navigation</span>
+          <span class="menu-line" aria-hidden="true"></span>
+          <span class="menu-line" aria-hidden="true"></span>
+        </button>
+
+        <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
+          <a href="#lifecycle">Lifecycle</a>
+          <a href="#crew">Crew</a>
+          <a href="#security">Security</a>
+          <a href="#providers">Providers</a>
+          <a class="button button-small button-dark" href="https://github.com/YesterdaysLemon/forgeward" data-github-link>
+            <span aria-hidden="true">↗</span> GitHub
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main-content">
+      <section class="hero section-grid" aria-labelledby="hero-title">
+        <div class="shell hero-grid">
+          <div class="hero-copy reveal">
+            <p class="eyebrow"><span class="signal-dot" aria-hidden="true"></span> Secure delivery system // v0.1</p>
+            <h1 id="hero-title" aria-label="A software firm in your terminal.">A software firm<br /><span>in your terminal.</span></h1>
+            <p class="hero-lede">
+              ForgeWard assembles an agile crew of planners, designers, builders, testers, and security reviewers—then keeps every handoff inside a secure software delivery lifecycle.
+            </p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="https://github.com/YesterdaysLemon/forgeward" data-github-link>
+                Get ForgeWard <span aria-hidden="true">↗</span>
+              </a>
+              <a class="button button-ghost" href="#quick-start">Run the quick start <span aria-hidden="true">↓</span></a>
+            </div>
+            <ul class="hero-proof" aria-label="ForgeWard principles">
+              <li><span aria-hidden="true">✓</span> Local-first</li>
+              <li><span aria-hidden="true">✓</span> Model-agnostic</li>
+              <li><span aria-hidden="true">✓</span> Evidence-driven</li>
+            </ul>
+          </div>
+
+          <div class="hero-console-wrap reveal" aria-label="Example ForgeWard terminal session">
+            <div class="field-note field-note-top" aria-hidden="true">RUNBOOK // 001</div>
+            <div class="terminal">
+              <div class="terminal-bar">
+                <div class="terminal-lights" aria-hidden="true">
+                  <span></span><span></span><span></span>
+                </div>
+                <span class="terminal-title">forgeward — mission control</span>
+                <span class="terminal-mode">LIVE</span>
+              </div>
+              <div class="terminal-body" role="img" aria-label="ForgeWard planning, building, and verifying a secure feature">
+                <p><span class="prompt">$</span> forgeward run <span class="lime">"ship passkey login"</span></p>
+                <p class="terminal-dim">◆ opening run FW-0142</p>
+
+                <div class="terminal-event">
+                  <span class="event-time">09:41</span>
+                  <span class="event-role orange">ORCH</span>
+                  <span>entered gated delivery lifecycle</span>
+                </div>
+                <div class="terminal-event">
+                  <span class="event-time">09:42</span>
+                  <span class="event-role">DESIGN</span>
+                  <span>added recovery + empty states</span>
+                </div>
+                <div class="terminal-event">
+                  <span class="event-time">09:43</span>
+                  <span class="event-role">SEC</span>
+                  <span>threat model: <strong>4 controls</strong></span>
+                </div>
+                <div class="terminal-event active-event">
+                  <span class="event-time">09:47</span>
+                  <span class="event-role">BUILD</span>
+                  <span>proposed 3 scoped file changes</span>
+                </div>
+
+                <div class="gate-box">
+                  <div><span>RELEASE GATE / VERIFY</span><span class="status-ready">READY</span></div>
+                  <div class="gate-progress" aria-hidden="true"><span></span></div>
+                  <p>Unit tests · SAST · dependency review</p>
+                </div>
+                <p class="terminal-command"><span class="prompt">›</span> human approval required<span class="cursor" aria-hidden="true"></span></p>
+              </div>
+            </div>
+            <div class="field-note field-note-bottom" aria-hidden="true">HUMANS HOLD THE KEYS</div>
+          </div>
+        </div>
+      </section>
+
+      <div class="ticker" aria-label="ForgeWard capabilities">
+        <div class="shell ticker-track">
+          <span>PLAN</span><i aria-hidden="true">◆</i>
+          <span>THREAT MODEL</span><i aria-hidden="true">◆</i>
+          <span>DESIGN</span><i aria-hidden="true">◆</i>
+          <span>BUILD</span><i aria-hidden="true">◆</i>
+          <span>VERIFY</span><i aria-hidden="true">◆</i>
+          <span>SHIP WITH EVIDENCE</span>
+        </div>
+      </div>
+
+      <section class="section section-grid" id="lifecycle" aria-labelledby="lifecycle-title">
+        <div class="shell">
+          <div class="section-heading reveal">
+            <div>
+              <p class="eyebrow">01 // The operating system</p>
+              <h2 id="lifecycle-title">Agile speed.<br />Secure rails.</h2>
+            </div>
+            <p>
+              Every mission moves through the same reviewable path. Specialist roles propose; the deterministic engine validates transitions; humans decide at the plan and release gates by default.
+            </p>
+          </div>
+
+          <ol class="lifecycle-grid" aria-label="Secure development lifecycle stages">
+            <li class="lifecycle-card reveal">
+              <div class="stage-number">01</div>
+              <p class="stage-kicker">Frame</p>
+              <h3>Intake</h3>
+              <p>Turn a rough request into scope, constraints, acceptance criteria, and a definition of done.</p>
+              <span class="artifact-tag">requirements.md</span>
+            </li>
+            <li class="lifecycle-card reveal">
+              <div class="stage-number">02</div>
+              <p class="stage-kicker">Defend</p>
+              <h3>Threat model</h3>
+              <p>Map assets, trust boundaries, abuse paths, and the controls the implementation must preserve.</p>
+              <span class="artifact-tag artifact-orange">threat-model.md</span>
+            </li>
+            <li class="lifecycle-card reveal">
+              <div class="stage-number">03</div>
+              <p class="stage-kicker">Sequence</p>
+              <h3>Plan</h3>
+              <p>Split the work into small, ordered stories with owners, dependencies, and explicit gates.</p>
+              <span class="artifact-tag">backlog.md</span>
+            </li>
+            <li class="lifecycle-card reveal">
+              <div class="stage-number">04</div>
+              <p class="stage-kicker">Execute</p>
+              <h3>Build</h3>
+              <p>Produce typed, path-bounded file proposals; write them only after an explicit apply run and approved plan.</p>
+              <span class="artifact-tag">implementation.md</span>
+            </li>
+            <li class="lifecycle-card reveal">
+              <div class="stage-number">05</div>
+              <p class="stage-kicker">Challenge</p>
+              <h3>Verify</h3>
+              <p>Run configured checks plus independent code, test, and security review against the acceptance criteria.</p>
+              <span class="artifact-tag artifact-orange">verification/</span>
+            </li>
+            <li class="lifecycle-card lifecycle-release reveal">
+              <div class="stage-number">06</div>
+              <p class="stage-kicker">Decide</p>
+              <h3>Release</h3>
+              <p>Package the change, summarize risk, and pause for the approvals your policy requires.</p>
+              <span class="artifact-tag">release-notes.md</span>
+            </li>
+          </ol>
+
+          <div class="control-note reveal">
+            <span class="control-icon" aria-hidden="true">!</span>
+            <p><strong>No invisible leaps.</strong> Each stage produces an artifact the next role—and you—can inspect.</p>
+            <a href="#security">Inspect the guardrails <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-dark" id="crew" aria-labelledby="crew-title">
+        <div class="shell">
+          <div class="section-heading section-heading-dark reveal">
+            <div>
+              <p class="eyebrow">02 // The crew</p>
+              <h2 id="crew-title">Specialists,<br />not a hive mind.</h2>
+            </div>
+            <p>
+              ForgeWard gives each role a narrow mandate, its own context, and a clear handoff contract. Less groupthink. Better review.
+            </p>
+          </div>
+
+          <div class="crew-workbench reveal">
+            <div class="role-tabs" role="tablist" aria-label="ForgeWard specialist roles">
+              <button class="role-tab" id="tab-scrum" type="button" role="tab" aria-selected="true" aria-controls="panel-scrum" tabindex="0">
+                <span class="role-index">01</span><span>Scrum master</span><span aria-hidden="true">→</span>
+              </button>
+              <button class="role-tab" id="tab-orchestrator" type="button" role="tab" aria-selected="false" aria-controls="panel-orchestrator" tabindex="-1">
+                <span class="role-index">02</span><span>Orchestrator</span><span aria-hidden="true">→</span>
+              </button>
+              <button class="role-tab" id="tab-design" type="button" role="tab" aria-selected="false" aria-controls="panel-design" tabindex="-1">
+                <span class="role-index">03</span><span>Design team</span><span aria-hidden="true">→</span>
+              </button>
+              <button class="role-tab" id="tab-build" type="button" role="tab" aria-selected="false" aria-controls="panel-build" tabindex="-1">
+                <span class="role-index">04</span><span>Build team</span><span aria-hidden="true">→</span>
+              </button>
+              <button class="role-tab" id="tab-test" type="button" role="tab" aria-selected="false" aria-controls="panel-test" tabindex="-1">
+                <span class="role-index">05</span><span>Test team</span><span aria-hidden="true">→</span>
+              </button>
+              <button class="role-tab" id="tab-security" type="button" role="tab" aria-selected="false" aria-controls="panel-security" tabindex="-1">
+                <span class="role-index">06</span><span>Security team</span><span aria-hidden="true">→</span>
+              </button>
+            </div>
+
+            <div class="role-panels">
+              <article class="role-panel" id="panel-scrum" role="tabpanel" aria-labelledby="tab-scrum" tabindex="0">
+                <p class="panel-status"><span aria-hidden="true"></span> Cadence keeper</p>
+                <h3>Turns ambition into finishable work.</h3>
+                <p>Turns approved outcomes into ordered work, calls out dependencies, and makes “done” explicit for every specialist.</p>
+                <div class="panel-grid">
+                  <div><span>Owns</span><strong>Scope · cadence · blockers</strong></div>
+                  <div><span>Produces</span><strong>Backlog · dependencies · DoD</strong></div>
+                </div>
+              </article>
+              <article class="role-panel" id="panel-orchestrator" role="tabpanel" aria-labelledby="tab-orchestrator" tabindex="0" hidden>
+                <p class="panel-status"><span aria-hidden="true"></span> Mission control</p>
+                <h3>Routes the right context to the right role.</h3>
+                <p>Drives the deterministic lifecycle, assembles bounded context, enforces gates, and records decisions without flattening every specialist into one giant prompt.</p>
+                <div class="panel-grid">
+                  <div><span>Owns</span><strong>Routing · context · handoffs</strong></div>
+                  <div><span>Produces</span><strong>Run state · manifests · ledger</strong></div>
+                </div>
+              </article>
+              <article class="role-panel" id="panel-design" role="tabpanel" aria-labelledby="tab-design" tabindex="0" hidden>
+                <p class="panel-status"><span aria-hidden="true"></span> Experience advocate</p>
+                <h3>Designs the states between the happy paths.</h3>
+                <p>Translates intent into flows, accessible interactions, system states, and acceptance details a builder can execute.</p>
+                <div class="panel-grid">
+                  <div><span>Owns</span><strong>Flows · states · accessibility</strong></div>
+                  <div><span>Produces</span><strong>UX brief · specs · review notes</strong></div>
+                </div>
+              </article>
+              <article class="role-panel" id="panel-build" role="tabpanel" aria-labelledby="tab-build" tabindex="0" hidden>
+                <p class="panel-status"><span aria-hidden="true"></span> Implementation crew</p>
+                <h3>Ships the smallest defensible change.</h3>
+                <p>Implements against approved contracts, proposes bounded file changes, and leaves clear notes for independent review.</p>
+                <div class="panel-grid">
+                  <div><span>Owns</span><strong>Code · migrations · docs</strong></div>
+                  <div><span>Produces</span><strong>File proposals · diff · build notes</strong></div>
+                </div>
+              </article>
+              <article class="role-panel" id="panel-test" role="tabpanel" aria-labelledby="tab-test" tabindex="0" hidden>
+                <p class="panel-status"><span aria-hidden="true"></span> Assumption attacker</p>
+                <h3>Tries to break the promise, not just the code.</h3>
+                <p>Assesses configured check evidence, acceptance criteria, regressions, and missing boundary coverage independently from the build team.</p>
+                <div class="panel-grid">
+                  <div><span>Owns</span><strong>Coverage · regression · evidence</strong></div>
+                  <div><span>Produces</span><strong>Test plan · results · defect log</strong></div>
+                </div>
+              </article>
+              <article class="role-panel" id="panel-security" role="tabpanel" aria-labelledby="tab-security" tabindex="0" hidden>
+                <p class="panel-status"><span aria-hidden="true"></span> Risk steward</p>
+                <h3>Reviews the system an attacker would see.</h3>
+                <p>Models threats early, validates controls late, and makes residual risk explicit before a release can advance.</p>
+                <div class="panel-grid">
+                  <div><span>Owns</span><strong>Threats · controls · policy</strong></div>
+                  <div><span>Produces</span><strong>Threat model · findings · risk memo</strong></div>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <div class="crew-principles reveal" aria-label="Crew design principles">
+            <div><span>01</span><p><strong>Bounded context</strong><br />A size-limited snapshot and role-specific playbook.</p></div>
+            <div><span>02</span><p><strong>Typed handoffs</strong><br />Artifacts, not “trust me” summaries.</p></div>
+            <div><span>03</span><p><strong>Independent review</strong><br />The builder does not grade itself.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section security-section" id="security" aria-labelledby="security-title">
+        <div class="shell security-grid">
+          <div class="security-copy reveal">
+            <p class="eyebrow">03 // Guardrails</p>
+            <h2 id="security-title">Secure by<br />construction.</h2>
+            <p class="security-lede">
+              The lifecycle is not a poster on the wall. It is the control plane: constrained tools, explicit approvals, recorded checks, and evidence you can audit after the run.
+            </p>
+
+            <ul class="security-list">
+              <li><span aria-hidden="true">01</span><div><strong>Threat-model before code</strong><p>Security requirements join acceptance criteria while changes are still cheap.</p></div></li>
+              <li><span aria-hidden="true">02</span><div><strong>Bounded execution</strong><p>Only typed file proposals and allowlisted checks cross the execution boundary.</p></div></li>
+              <li><span aria-hidden="true">03</span><div><strong>Policy-gated advancement</strong><p>Required check outcomes, verification-stage finding severity, evidence integrity, and human approvals determine whether work moves.</p></div></li>
+              <li><span aria-hidden="true">04</span><div><strong>Reviewable run ledger</strong><p>Prompt digests, decisions, artifacts, and checks form a tamper-evident chain.</p></div></li>
+            </ul>
+          </div>
+
+          <div class="security-board reveal" aria-label="Example security gate status board">
+            <div class="board-header">
+              <div>
+                <span>RELEASE CONTROL</span>
+                <strong>FW-0142 / passkey-login</strong>
+              </div>
+              <span class="board-state">HOLD</span>
+            </div>
+            <div class="risk-dial">
+              <div class="risk-score"><span>EVIDENCE</span><strong>4</strong><small>/ 4</small></div>
+              <div class="risk-scale" role="progressbar" aria-label="Required release evidence present" aria-valuemin="0" aria-valuemax="4" aria-valuenow="4"><span></span></div>
+              <div class="risk-labels"><span>REQUIRED</span><span>PRESENT</span></div>
+            </div>
+            <div class="check-table" role="table" aria-label="Release checks">
+              <div class="check-row check-head" role="row">
+                <span role="columnheader">CONTROL</span><span role="columnheader">EVIDENCE</span><span role="columnheader">STATE</span>
+              </div>
+              <div class="check-row" role="row">
+                <span role="cell">Threat model</span><span role="cell">4 controls</span><span class="check-pass" role="cell">PASS</span>
+              </div>
+              <div class="check-row" role="row">
+                <span role="cell">Test suite</span><span role="cell">186 / 186</span><span class="check-pass" role="cell">PASS</span>
+              </div>
+              <div class="check-row" role="row">
+                <span role="cell">Dependency scan</span><span role="cell">0 critical</span><span class="check-pass" role="cell">PASS</span>
+              </div>
+              <div class="check-row" role="row">
+                <span role="cell">Human approval</span><span role="cell">owner required</span><span class="check-wait" role="cell">WAIT</span>
+              </div>
+            </div>
+            <div class="board-footer">
+              <span aria-hidden="true">⛨</span>
+              <p><strong>Fail closed.</strong> A missing check is not a passing check.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-grid provider-section" id="providers" aria-labelledby="providers-title">
+        <div class="shell">
+          <div class="provider-intro reveal">
+            <div>
+              <p class="eyebrow">04 // Model layer</p>
+              <h2 id="providers-title">OpenAI-shaped.<br /><span>Provider-neutral.</span></h2>
+            </div>
+            <div>
+              <p>
+                Treat model providers like database drivers: keep one stable application contract, then swap the adapter. ForgeWard uses an OpenAI-compatible boundary by default without making your workflow belong to any one model vendor.
+              </p>
+              <a class="text-link" href="https://github.com/YesterdaysLemon/forgeward/blob/main/src/forgeward/providers/base.py">Explore the adapter interface <span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+
+          <div class="provider-workbench reveal">
+            <div class="adapter-map" aria-label="Model provider adapter architecture">
+              <div class="provider-sources">
+                <div><span class="provider-status ready">BUILT IN</span><strong>OpenAI-compatible</strong><small>Standard endpoint</small></div>
+                <div><span class="provider-status ready">COMPAT</span><strong>Local runtimes</strong><small>Ollama · vLLM · LM Studio</small></div>
+                <div><span class="provider-status ready">LITELLM</span><strong>Native providers</strong><small>Optional in-process adapter</small></div>
+                <div><span class="provider-status ready">CONFIG</span><strong>Enterprise gateway</strong><small>Bring a custom base URL</small></div>
+              </div>
+              <div class="adapter-core">
+                <span>FORGEWARD</span>
+                <strong>MODEL<br />ADAPTER</strong>
+                <small>request → normalized response</small>
+              </div>
+              <div class="adapter-output">
+                <span>STABLE CONTRACT</span>
+                <strong>One crew.<br />Same runbook.</strong>
+                <small>Models can change. The lifecycle does not.</small>
+              </div>
+            </div>
+
+            <div class="config-card">
+              <div class="code-header">
+                <span>.forgeward/firm.yaml</span>
+                <button class="copy-button" type="button" data-copy-target="provider-config">
+                  <span class="copy-label">Copy</span>
+                </button>
+              </div>
+              <pre id="provider-config"><code><span class="code-dim"># one contract, any compatible endpoint</span>
+project:
+  default_provider: <span class="code-lime">gateway</span>
+providers:
+  gateway:
+    adapter: <span class="code-lime">openai-compatible</span>
+    base_url: <span class="code-orange">http://127.0.0.1:4000/v1</span>
+    model: <span class="code-orange">forgeward/default</span>
+    api_key_env: <span class="code-orange">FORGEWARD_API_KEY</span>
+    max_response_bytes: <span class="code-orange">2000000</span>
+    allow_insecure_http: <span class="code-lime">false</span>
+    enabled: <span class="code-lime">true</span></code></pre>
+              <p class="code-note"><span aria-hidden="true">i</span> Credentials stay in environment variables; preview selected context before a live call.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section quick-start-section" id="quick-start" aria-labelledby="quick-start-title">
+        <div class="shell quick-start-grid">
+          <div class="quick-start-copy reveal">
+            <p class="eyebrow">05 // Field setup</p>
+            <h2 id="quick-start-title">From clone<br />to crew.</h2>
+            <p>Start in a sandbox, point ForgeWard at your compatible model endpoint, and give the team its first mission.</p>
+            <div class="time-stamp" aria-label="Setup takes about five minutes">
+              <span>SETUP TIME</span><strong>≈ 05:00</strong><small>No hosted account required</small>
+            </div>
+          </div>
+
+          <div class="quick-start-terminal reveal">
+            <div class="code-header">
+              <span>QUICKSTART.sh</span>
+              <button class="copy-button copy-button-light" type="button" data-copy-target="quickstart-code">
+                <span class="copy-label">Copy all</span>
+              </button>
+            </div>
+            <pre id="quickstart-code"><code><span class="step-comment"># 1 — install the field kit</span>
+<span data-github-clone>git clone https://github.com/YesterdaysLemon/forgeward.git</span>
+cd forgeward
+uv tool install .
+
+<span class="step-comment"># 2 — enter your project</span>
+cd /path/to/your/project
+forgeward init
+
+<span class="step-comment"># 3 — inspect policy, then assemble the crew</span>
+forgeward doctor
+forgeward context preview
+forgeward run <span class="code-lime">"ship the next safe thing"</span></code></pre>
+            <div class="terminal-footer-line">
+              <span><i aria-hidden="true"></i> Local workspace</span>
+              <span><i aria-hidden="true"></i> Your model</span>
+              <span><i aria-hidden="true"></i> Your approvals</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section faq-section" aria-labelledby="faq-title">
+        <div class="shell faq-grid">
+          <div class="faq-heading reveal">
+            <p class="eyebrow">06 // Debrief</p>
+            <h2 id="faq-title">Questions<br />before launch.</h2>
+            <p>Still evaluating? Open an issue on GitHub. The runbook gets better in public.</p>
+            <a class="button button-ghost" href="https://github.com/YesterdaysLemon/forgeward/issues">Ask the maintainers <span aria-hidden="true">↗</span></a>
+          </div>
+
+          <div class="faq-list reveal">
+            <details>
+              <summary><span>Is ForgeWard just another coding agent?</span><i aria-hidden="true"></i></summary>
+              <p>No. It is a coordination and control layer for multiple specialist roles. Models do the reasoning; ForgeWard defines who acts, what context they receive, which artifact they owe, and which gate comes next.</p>
+            </details>
+            <details>
+              <summary><span>Does it require OpenAI?</span><i aria-hidden="true"></i></summary>
+              <p>No. The built-in HTTP adapter follows the familiar OpenAI request and response shape, so compatible cloud gateways and local runtimes can slot in. Install the optional LiteLLM extra for native provider dialects; use a separate HTTPS LiteLLM gateway when you need ForgeWard's stricter transport and body-limit boundary.</p>
+            </details>
+            <details>
+              <summary><span>Is the adapter layer like an ORM for models?</span><i aria-hidden="true"></i></summary>
+              <p>That is the idea: ForgeWard owns stable provider-neutral request/result types, then uses an OpenAI-compatible HTTP driver or optional LiteLLM driver underneath. Capabilities stay explicit instead of being silently flattened.</p>
+            </details>
+            <details>
+              <summary><span>Can agents change my code without approval?</span><i aria-hidden="true"></i></summary>
+              <p>Only after you start with <code>--apply</code> and approve the plan gate. ForgeWard then restricts paths, commands, and check-process environment variables, and holds release for a human by default. Native runs cannot deny network access; use an external sandbox when that boundary matters.</p>
+            </details>
+            <details>
+              <summary><span>Where do prompts, code, and credentials go?</span><i aria-hidden="true"></i></summary>
+              <p>Code and run artifacts stay in your workspace. Model-bound context goes only to the endpoint you configure. Credentials are referenced by environment-variable name and should never be written into prompts or project files.</p>
+            </details>
+            <details>
+              <summary><span>Is it ready for production?</span><i aria-hidden="true"></i></summary>
+              <p>ForgeWard is an early, forkable field kit. Use it in a sandbox, inspect the policies, and keep humans on consequential approvals while the project hardens through real-world use.</p>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <section class="final-cta" aria-labelledby="final-cta-title">
+        <div class="cta-grid" aria-hidden="true"></div>
+        <div class="shell final-cta-inner reveal">
+          <p class="eyebrow">READY WHEN YOU ARE // OPEN SOURCE</p>
+          <h2 id="final-cta-title">Put your new crew<br />on the next ticket.</h2>
+          <p>Clone the runbook. Choose your models. Keep the keys.</p>
+          <div class="final-actions">
+            <a class="button button-primary button-large" href="https://github.com/YesterdaysLemon/forgeward" data-github-link>View ForgeWard on GitHub <span aria-hidden="true">↗</span></a>
+            <a class="button button-inverse button-large" href="#quick-start">Read the quick start <span aria-hidden="true">↑</span></a>
+          </div>
+          <div class="cta-stamp" aria-hidden="true">FORK<br />THE<br />FIRM</div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell footer-grid">
+        <div>
+          <a class="wordmark wordmark-footer" href="#top" aria-label="ForgeWard home">
+            <span class="brand-mark" aria-hidden="true"><span>F</span><span>W</span></span>
+            <span class="brand-name">FORGE<span>/</span>WARD</span>
+          </a>
+          <p>Secure orchestration for software teams made of people and models.</p>
+        </div>
+        <nav aria-label="Footer navigation">
+          <a href="#lifecycle">Lifecycle</a>
+          <a href="#crew">Crew</a>
+          <a href="#security">Security</a>
+          <a href="#providers">Providers</a>
+        </nav>
+        <div class="footer-repo">
+          <span>FIELD REPOSITORY</span>
+          <a href="https://github.com/YesterdaysLemon/forgeward" data-github-link data-github-display>github.com/YesterdaysLemon/forgeward</a>
+        </div>
+      </div>
+      <div class="shell footer-bottom">
+        <span>© <span id="current-year">2026</span> ForgeWard contributors</span>
+        <span>Built in public. Human approved.</span>
+      </div>
+    </footer>
+
+    <div class="copy-status sr-only" id="copy-status" role="status" aria-live="polite"></div>
+  </body>
+</html>

@@ -1,0 +1,32 @@
+name: Feature proposal
+description: Propose a scoped capability or security improvement.
+title: "[proposal] "
+labels: [enhancement, triage]
+body:
+  - type: textarea
+    id: outcome
+    attributes:
+      label: User outcome
+      description: What should become possible, and for whom?
+    validations:
+      required: true
+  - type: textarea
+    id: current
+    attributes:
+      label: Current limitation
+    validations:
+      required: true
+  - type: textarea
+    id: trust
+    attributes:
+      label: Trust-boundary impact
+      description: Does this affect model payloads, prompts, tools, paths, credentials, gates, or evidence?
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Acceptance evidence
+      description: What deterministic tests or artifacts should prove the feature works?
+    validations:
+      required: true

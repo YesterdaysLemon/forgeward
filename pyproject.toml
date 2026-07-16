@@ -1,0 +1,91 @@
+[build-system]
+requires = ["hatchling==1.27.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "forgeward"
+version = "0.1.0"
+description = "A security-first, model-agnostic AI software firm in your terminal"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+authors = [{ name = "ForgeWard contributors" }]
+keywords = ["ai", "agents", "cli", "ssdlc", "security", "orchestration"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: Console",
+  "License :: OSI Approved :: Apache Software License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Software Development :: Quality Assurance",
+  "Topic :: Security",
+]
+dependencies = [
+  "httpx>=0.28,<1",
+  "pydantic>=2.10,<3",
+  "PyYAML>=6.0.2,<7",
+  "rich>=13.9,<15",
+  "typer>=0.16,<1",
+]
+
+[project.optional-dependencies]
+# 1.92.0 dropped portable wheels; retain Windows support until upstream restores them.
+litellm = ["litellm>=1.75,<1.92"]
+dev = [
+  "hypothesis>=6.130,<7",
+  "mypy>=1.15,<2",
+  "pytest>=8.3,<9",
+  "pytest-cov>=6,<7",
+  "respx>=0.22,<1",
+  "ruff>=0.11,<1",
+  "types-PyYAML>=6.0.12,<7",
+]
+
+[project.scripts]
+forgeward = "forgeward.cli:app"
+
+[project.urls]
+Homepage = "https://github.com/YesterdaysLemon/forgeward"
+Documentation = "https://github.com/YesterdaysLemon/forgeward#readme"
+Issues = "https://github.com/YesterdaysLemon/forgeward/issues"
+Source = "https://github.com/YesterdaysLemon/forgeward"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/forgeward"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"templates" = "forgeward/templates"
+"skills/forgeward-team" = "forgeward/skills/forgeward-team"
+
+[tool.pytest.ini_options]
+addopts = "-ra --strict-markers --strict-config"
+testpaths = ["tests"]
+
+[tool.coverage.run]
+branch = true
+source = ["forgeward"]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true
+fail_under = 85
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "S", "SIM", "RUF"]
+ignore = ["S101"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S101", "S108"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+packages = ["forgeward"]

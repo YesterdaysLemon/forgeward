@@ -1,0 +1,162 @@
+version: 1
+
+project:
+  name: my-project
+  default_provider: demo
+
+# ForgeWard owns one OpenAI-compatible boundary. Point it at LiteLLM, Portkey,
+# OpenRouter, Ollama, vLLM, LM Studio, or another compatible endpoint.
+providers:
+  demo:
+    adapter: demo
+    model: forgeward-demo
+    enabled: true
+    capabilities:
+      tools: false
+      json_schema: true
+      streaming: false
+      images: false
+      reasoning: false
+
+  local:
+    adapter: openai-compatible
+    base_url: http://localhost:11434/v1
+    model: qwen3-coder
+    api_key_env: null
+    timeout_seconds: 120
+    max_response_bytes: 2000000
+    allow_insecure_http: false
+    enabled: false
+    capabilities:
+      tools: true
+      json_schema: true
+      streaming: false
+      images: false
+      reasoning: true
+
+  gateway:
+    adapter: openai-compatible
+    base_url: http://localhost:4000/v1
+    model: forgeward/default
+    api_key_env: FORGEWARD_API_KEY
+    timeout_seconds: 120
+    max_response_bytes: 2000000
+    allow_insecure_http: false
+    enabled: false
+    capabilities:
+      tools: true
+      json_schema: true
+      streaming: true
+      images: false
+      reasoning: true
+
+  # Install `forgeward[litellm]` to call native provider dialects in process.
+  # Without base_url, LiteLLM owns endpoint/proxy/CA behavior and initial response allocation;
+  # `forgeward doctor` reports that delegated boundary.
+  native:
+    adapter: litellm
+    model: anthropic/your-model-id
+    api_key_env: ANTHROPIC_API_KEY
+    timeout_seconds: 120
+    max_response_bytes: 2000000
+    allow_insecure_http: false
+    enabled: false
+    capabilities:
+      tools: true
+      json_schema: true
+      streaming: false
+      images: false
+      reasoning: true
+
+team:
+  - id: product
+    mission: Turn the objective into bounded requirements and testable acceptance criteria.
+    provider: null
+    prompt: product.md
+    allowed_tools: [repository.read, artifact.read]
+    may_approve: []
+
+  - id: designer
+    mission: Define accessible user flows, interaction states, and UX constraints.
+    provider: null
+    prompt: designer.md
+    allowed_tools: [repository.read, artifact.read]
+    may_approve: []
+
+  - id: security
+    mission: Threat-model the change and independently assess implementation risk.
+    provider: null
+    prompt: security.md
+    allowed_tools: [repository.read, artifact.read, diff.read, check.read]
+    may_approve: []
+
+  - id: architect
+    mission: Select the smallest maintainable design that satisfies security requirements.
+    provider: null
+    prompt: architect.md
+    allowed_tools: [repository.read, artifact.read]
+    may_approve: []
+
+  - id: scrum-master
+    mission: Decompose approved outcomes into ordered, independently verifiable work.
+    provider: null
+    prompt: scrum-master.md
+    allowed_tools: [artifact.read]
+    may_approve: []
+
+  - id: builder
+    mission: Propose task-scoped source changes that implement the approved plan.
+    provider: null
+    prompt: builder.md
+    allowed_tools: [repository.read, artifact.read, diff.read, workspace.propose]
+    may_approve: []
+
+  - id: reviewer
+    mission: Independently review the implementation against requirements and architecture.
+    provider: null
+    prompt: reviewer.md
+    allowed_tools: [repository.read, artifact.read, diff.read, check.read]
+    may_approve: []
+
+  - id: tester
+    mission: Assess deterministic checks and identify missing behavioral coverage.
+    provider: null
+    prompt: tester.md
+    allowed_tools: [artifact.read, diff.read, check.read]
+    may_approve: []
+
+  - id: release
+    mission: Assemble an evidence-backed handoff, rollback notes, and release summary.
+    provider: null
+    prompt: release.md
+    allowed_tools: [artifact.read, diff.read, check.read]
+    may_approve: []
+
+workflow:
+  plan_roles: [product, designer, security, architect, scrum-master]
+  build_role: builder
+  verification_roles: [reviewer, tester, security]
+  release_role: release
+
+policy:
+  human_gates: [plan, release]
+  denied_paths: [.git, .forgeward, .env, .ssh]
+  allowed_executables: [python, python3, pytest, ruff, mypy, uv, npm, pnpm, yarn]
+  check_env_allowlist:
+    [PATH, SYSTEMROOT, WINDIR, COMSPEC, PATHEXT, TEMP, TMP, TMPDIR, USERPROFILE, HOME, LANG, LC_ALL, TERM, CI, VIRTUAL_ENV]
+  max_context_files: 24
+  max_context_bytes: 120000
+  max_file_bytes: 250000
+  max_output_chars: 40000
+  max_provider_calls: 20
+  fail_on_severity: high
+  telemetry: false
+
+# Commands are argv arrays and always run with shell=false. Start empty, then add
+# project-native checks deliberately, for example:
+# checks:
+#   - name: unit tests
+#     command: [uv, run, pytest, -q]
+#     timeout_seconds: 300
+#     required: true
+checks: []

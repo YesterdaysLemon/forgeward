@@ -1,0 +1,4 @@
+interface:
+  display_name: "ForgeWard Secure Delivery Team"
+  short_description: "Run a gated, evidence-led AI software team"
+  default_prompt: "Use $forgeward-team to plan and deliver this project through ForgeWard secure lifecycle."

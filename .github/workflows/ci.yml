@@ -1,0 +1,178 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Python ${{ matrix.python }} - ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python: ["3.11", "3.13"]
+    steps:
+      - name: Check out source
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - name: Set up Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Set up uv
+        uses: astral-sh/setup-uv@11f9893b081a58869d3b5fccaea48c9e9e46f990 # v8.3.2
+        with:
+          enable-cache: true
+          version: "0.11.8"
+      - name: Install locked dependencies
+        run: uv sync --locked --extra dev
+        timeout-minutes: 10
+      - name: Lint
+        run: uv run ruff check .
+      - name: Check formatting
+        run: uv run ruff format --check .
+      - name: Type-check
+        run: uv run mypy src/forgeward
+      - name: Test
+        run: uv run pytest --cov=forgeward --cov-report=term-missing --cov-report=xml
+        timeout-minutes: 15
+      - name: Smoke locked LiteLLM extra on Windows
+        if: matrix.os == 'windows-latest' && matrix.python == '3.11'
+        run: |
+          uv sync --locked --extra dev --extra litellm
+          uv run python -c "import litellm; from forgeward.providers.litellm_adapter import LiteLLMProvider"
+        timeout-minutes: 10
+      - name: Build wheel and source archive
+        if: matrix.os == 'ubuntu-latest' && matrix.python == '3.13'
+        run: uv build
+        timeout-minutes: 5
+      - name: Smoke built wheel in an isolated environment
+        if: matrix.os == 'ubuntu-latest' && matrix.python == '3.13'
+        shell: bash
+        run: |
+          set -euo pipefail
+          wheel_path="$(find dist -maxdepth 1 -type f -name 'forgeward-*.whl' -print -quit)"
+          test -n "$wheel_path"
+          venv="$RUNNER_TEMP/forgeward-wheel-smoke"
+          project="$RUNNER_TEMP/forgeward-project-smoke"
+          requirements="$RUNNER_TEMP/forgeward-wheel-requirements.txt"
+          uv export --quiet --locked --extra litellm --no-dev --no-emit-project --output-file "$requirements"
+          uv venv "$venv"
+          uv pip install --python "$venv/bin/python" --require-hashes --requirements "$requirements"
+          uv pip install --python "$venv/bin/python" --no-deps "$wheel_path"
+          "$venv/bin/forgeward" --version | grep -F "ForgeWard 0.1.0"
+          "$venv/bin/python" - <<'PY'
+          from importlib.metadata import metadata, requires
+          from pathlib import Path
+          import forgeward
+
+          package = Path(forgeward.__file__).parent
+          assert (package / "templates" / "default" / "firm.yaml").is_file()
+          assert (package / "skills" / "forgeward-team" / "SKILL.md").is_file()
+          assert "litellm" in metadata("forgeward").get_all("Provides-Extra")
+          assert any(item.startswith("litellm") for item in (requires("forgeward") or []))
+          PY
+          "$venv/bin/forgeward" init "$project"
+          "$venv/bin/forgeward" doctor --root "$project"
+          "$venv/bin/python" -c "import litellm; from forgeward.providers.litellm_adapter import LiteLLMProvider"
+        timeout-minutes: 10
+
+  site:
+    name: Landing page
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out source
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - name: Validate JavaScript
+        run: node --check site/app.js
+      - name: Reject inline executable assets
+        run: |
+          if grep -En '<style([ >])| style=' site/index.html; then
+            echo 'Inline executable assets violate the site CSP.'
+            exit 1
+          fi
+          if grep -PEn '<script(?![^>]*\bsrc=)[^>]*>' site/index.html; then
+            echo 'Inline scripts violate the site CSP.'
+            exit 1
+          fi
+        shell: bash
+
+  containers:
+    name: Container builds
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    needs: [test, site]
+    steps:
+      - name: Check out source
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - name: Set up Buildx
+        uses: docker/setup-buildx-action@bb05f3f5519dd87d3ba754cc423b652a5edd6d2c # v4.2.0
+      - name: Build CLI image
+        uses: docker/build-push-action@53b7df96c91f9c12dcc8a07bcb9ccacbed38856a # v7.3.0
+        timeout-minutes: 10
+        with:
+          context: .
+          load: true
+          push: false
+          tags: forgeward:ci
+          cache-from: type=gha,scope=forgeward-cli
+          cache-to: type=gha,mode=max,scope=forgeward-cli
+      - name: Smoke CLI image
+        run: >-
+          docker run --rm --security-opt no-new-privileges forgeward:ci --version
+          | grep -F "ForgeWard 0.1.0"
+        timeout-minutes: 2
+      - name: Build landing image
+        uses: docker/build-push-action@53b7df96c91f9c12dcc8a07bcb9ccacbed38856a # v7.3.0
+        timeout-minutes: 10
+        with:
+          context: ./site
+          load: true
+          push: false
+          tags: forgeward-site:ci
+          cache-from: type=gha,scope=forgeward-site
+          cache-to: type=gha,mode=max,scope=forgeward-site
+      - name: Smoke landing image and health check
+        shell: bash
+        run: |
+          set -euo pipefail
+          container_id="$(docker run --detach --rm \
+            --read-only \
+            --tmpfs /var/cache/nginx \
+            --tmpfs /var/run \
+            --tmpfs /tmp \
+            --security-opt no-new-privileges \
+            --publish 127.0.0.1:18080:8080 \
+            forgeward-site:ci)"
+          cleanup() {
+            docker rm --force "$container_id" >/dev/null 2>&1 || true
+          }
+          trap cleanup EXIT
+          for _ in {1..45}; do
+            status="$(docker inspect --format '{{.State.Health.Status}}' "$container_id")"
+            if [ "$status" = "healthy" ]; then
+              curl --fail --silent --show-error http://127.0.0.1:18080/ >/dev/null
+              exit 0
+            fi
+            if [ "$status" = "unhealthy" ]; then
+              docker logs "$container_id"
+              exit 1
+            fi
+            sleep 1
+          done
+          docker logs "$container_id"
+          echo "Landing container did not become healthy in time."
+          exit 1
+        timeout-minutes: 2
