@@ -33,7 +33,7 @@ dependencies = [
 
 [project.optional-dependencies]
 # 1.92.0 dropped portable wheels; retain Windows support until upstream restores them.
-litellm = ["litellm>=1.75,<1.92"]
+litellm = ["litellm>=1.93.0,<1.94"]
 dev = [
   "hypothesis>=6.130,<7",
   "mypy>=2.3.0,<3",
