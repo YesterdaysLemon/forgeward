@@ -35,7 +35,7 @@ dependencies = [
 # 1.92.0 dropped portable wheels; retain Windows support until upstream restores them.
 litellm = ["litellm>=1.75,<1.92"]
 dev = [
-  "hypothesis>=6.130,<7",
+  "hypothesis>=6.161.0,<7",
   "mypy>=2.3.0,<3",
   "pytest>=9.1.1,<10",
   "pytest-cov>=6,<7",
